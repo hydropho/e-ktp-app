@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  e-kpt-app-frontend:
+    container-name: e-ktp-app-frontend
+    image: registry.blubox.id/rayon-cicd/e-ktp-app:latest
+    ports:
+      - '16045:80'
+    restart: always
