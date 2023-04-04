@@ -1,10 +1,10 @@
-package com.hydropho.ektpapp;
+package com.hydropho.springboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EKtpAppApplicationTests {
+class SpringbootApplicationTests {
 
 	@Test
 	void contextLoads() {

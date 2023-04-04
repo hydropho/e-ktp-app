@@ -1,13 +1,13 @@
-package com.hydropho.ektpapp;
+package com.hydropho.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EKtpAppApplication {
+public class SpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EKtpAppApplication.class, args);
+		SpringApplication.run(SpringbootApplication.class, args);
 	}
 
 }
