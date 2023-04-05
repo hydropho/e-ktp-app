@@ -1,22 +1,20 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
+import { createWebHistory, createRouter } from 'vue-router'
+// import VueSweetalert2 from 'vue-sweetalert2'
 import Routes from './routes.js'
-import VueRouter from 'vue-router'
-import VueSweetalert2 from 'vue-sweetalert2';
 
-Vue.use(VueSweetalert2)
-Vue.config.productionTip = false
-Vue.use(VueRouter)
+// Vue.use(VueSweetalert2)
+// Vue.config.productionTip = false
+// Vue.use(VueRouter)
 
-const router = new VueRouter({
-  routes: Routes,
-  mode: 'history',
+const router = createRouter({
+    routes: Routes,
+    history: createWebHistory(),
 });
 
-router.replace({ path: '/auth' })
+router.replace({ redirect: 'auth' })
+// router.push({ path: '/auth' })
 
 
-new Vue({
-  render: h => h(App),
-  router: router
-}).$mount('#app')
+createApp(App).use(router).mount('#app')

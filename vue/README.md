@@ -1,4 +1,4 @@
-# vue
+# e-ktp-app
 
 ## Project setup
 ```
