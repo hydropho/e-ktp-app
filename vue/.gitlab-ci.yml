@@ -7,7 +7,7 @@ compile-node:
   stage: compile
   image: node:gallium-alpine
   script:
-    - npm ci
+    - npm install --legacy-peer-deps
     - npm run build
   artifacts:
     paths:
@@ -22,7 +22,7 @@ build-docker-image:
   stage: build
   image: registry.blubox.id/infrastructure/service-images:docker-stable
   services:
-    - name: registry.blubox.id/infrastructure/service-images-docker-dind
+    - name: registry.blubox.id/infrastructure/service-images:docker-dind
       alias: docker
   variables:
     DOCKER_TLS_CERTDIR: ""
@@ -43,14 +43,14 @@ deploy-app:
   stage: deploy
   image: registry.blubox.id/infrastructure/service-images:docker-compose
   variables:
-    repo_name: rayon-cicd 
-    app_name: e-ktp-app-frontend
+    application_name: frontend
+    project_name: e-ktp-app
   script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
-    - sed -i "s/$app_name:latest/$app_name:$CI_COMMIT_SHORT_SHA/g" "sekrip/docker-compose.yml"
-    - cp sekrip/docker-compose.yml /root/docker/$repo_name/$app_name
-    - docker-compose -f /root/docker/$repo_name/$app_name/docker-compose.yml up -d
+    - sed -i "s/$project_name-$application_name:latest/$project_name-$application_name:$CI_COMMIT_SHORT_SHA/g" "sekrip/docker-compose.yml"
+    - cp sekrip/docker-compose.yml /root/docker/$project_name/$application_name
+    - docker-compose -f /root/docker/$project_name/$application_name/docker-compose.yml up -d
   only:
     - e-ktp-app-frontend
-  tags;
+  tags:
     - rayon-cicd
